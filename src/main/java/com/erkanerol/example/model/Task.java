@@ -1,16 +1,27 @@
 package com.erkanerol.example.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created by erkan on 29.05.2016.
  */
+@Entity(name = "Task")
 public class Task {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Column
     private String title;
 
+    @Column
     private String details;
 
+    @Column
     private Boolean isDone;
 
 

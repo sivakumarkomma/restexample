@@ -20,6 +20,6 @@ public class TodoRestController {
 
     @RequestMapping(value = "/task")
     public List<Task> getAllTasks(){
-        return taskDao.getAllTasks();
+        return taskDao.getAll();
     }
 }
