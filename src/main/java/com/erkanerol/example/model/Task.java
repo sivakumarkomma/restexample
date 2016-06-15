@@ -24,6 +24,15 @@ public class Task {
     @Column
     private Boolean isDone;
 
+    public Task() {
+
+    }
+
+    public Task(String title, String details, Boolean isDone) {
+        this.title = title;
+        this.details = details;
+        this.isDone = isDone;
+    }
 
     public Long getId() {
         return id;

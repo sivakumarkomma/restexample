@@ -1,7 +1,10 @@
-package com.erkanerol.example;
+package com.erkanerol.example.controller;
 
-import com.erkanerol.example.dao.TaskDao;
+import com.erkanerol.example.RestExampleApplication;
+import com.erkanerol.example.dao.TaskRepository;
+import com.erkanerol.example.model.Task;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -32,7 +37,12 @@ public class RestExampleApplicationTests {
 
 
 	@Autowired
-	private TaskDao taskDao;
+	private TaskRepository taskRepository	;
+
+	List<Task> taskList;
+	Task homeWork;
+	Task reading;
+	Task cleaning;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -42,16 +52,40 @@ public class RestExampleApplicationTests {
 	@Before
 	public void setup() throws Exception {
 		this.mockMvc = webAppContextSetup(webApplicationContext).build();
+
+		homeWork = new Task("HomeWork","Math 101",false);
+		reading = new Task("Reading","Clean Code",true);
+		cleaning = new Task("Cleaning","Bathroom",false);
+
+		taskRepository.deleteAll();
+		taskList = Arrays.asList(homeWork,reading,cleaning);
+		taskRepository.save(taskList);
+
 	}
 
 	@Test
-	public void testTasks() throws Exception {
+	public void getAllTasks_NotEmptyList_ReturnList() throws Exception {
 		mockMvc.perform(get("/task"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$", hasSize(1)))
-				.andExpect(jsonPath("$[0].id", is(1)));
+				.andExpect(jsonPath("$", hasSize(taskList.size())));
 	}
 
+
+	@Test
+	public void getTaskById_Exists_ReturnObject() throws Exception {
+		mockMvc.perform(get("/task/"+(taskList.get(0).getId())))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(contentType))
+				.andExpect(jsonPath("$.id",is(taskList.get(0).getId().intValue())))
+				.andExpect(jsonPath("$.title",is(taskList.get(0).getTitle())));
+	}
+
+
+	@Test
+	public void getTaskById_NotExists_NoContent() throws Exception {
+		mockMvc.perform(get("/task/-1"))
+				.andExpect(status().isNoContent());
+	}
 
 }
