@@ -3,18 +3,20 @@ package com.erkanerol.example.controller;
 import com.erkanerol.example.RestExampleApplication;
 import com.erkanerol.example.dao.TaskRepository;
 import com.erkanerol.example.model.Task;
+import com.google.gson.Gson;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.transaction.Transactional;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +24,8 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
@@ -29,7 +33,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = RestExampleApplication.class)
 @WebAppConfiguration
-public class RestExampleApplicationTests {
+@Transactional
+@TestPropertySource(locations = "classpath:test.properties")
+public class TaskControllerTest {
 
 	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 			MediaType.APPLICATION_JSON.getSubtype(),
@@ -87,5 +93,22 @@ public class RestExampleApplicationTests {
 		mockMvc.perform(get("/task/-1"))
 				.andExpect(status().isNoContent());
 	}
+
+	@Test
+	public void createTask_ValidTask_Ok() throws Exception {
+		Task task = new Task();
+		task.setDetails("testDetail");
+		task.setTitle("testTitle");
+		task.setDone(false);
+
+		mockMvc.perform(post("/task/").contentType(contentType).content(getAsJson(task)))
+				.andExpect(status().isOk()).andDo(print());
+	}
+
+	private String getAsJson(Task task) {
+		Gson gson = new Gson();
+		return gson.toJson(task);
+	}
+
 
 }

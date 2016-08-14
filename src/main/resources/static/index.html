@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rest Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="rest-app.js"></script>
+    <link rel="stylesheet" type="text/css" href="rest-app.css">
+</head>
+<body>
+    <div data-ng-app="restApp" data-ng-controller="restController">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Details</th>
+                <th>Done</th>
+            </tr>
+            <tr data-ng-repeat="task in tasks">
+                <td>{{task.id}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.details}}</td>
+                <td>{{task.done}}</td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>
