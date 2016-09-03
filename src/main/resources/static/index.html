@@ -1,29 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="restApp">
 <head>
     <meta charset="UTF-8">
     <title>Rest Example</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+
     <script src="rest-app.js"></script>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
     <link rel="stylesheet" type="text/css" href="rest-app.css">
 </head>
-<body>
-    <div data-ng-app="restApp" data-ng-controller="restController">
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Details</th>
-                <th>Done</th>
-            </tr>
-            <tr data-ng-repeat="task in tasks">
-                <td>{{task.id}}</td>
-                <td>{{task.title}}</td>
-                <td>{{task.details}}</td>
-                <td>{{task.done}}</td>
-            </tr>
 
-        </table>
+<body data-ng-controller="mainController">
+
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Angular Rest Example</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#list"><i class="fa fa-list"></i>List</a></li>
+                    <li><a href="#add"><i class="fa fa-plus"></i>Add</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="main" >
+        <div ng-view></div>
     </div>
+
 </body>
 </html>
