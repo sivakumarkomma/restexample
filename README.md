@@ -1,7 +1,9 @@
 How to start?
 
-1. gradle build buildDocker
+1. gradle build -x test buildDocker
 2. cd ./build/docker/
 3. docker build .
-4. docker start 485 (mysql server container id)
-5. docker run --net="host" -t erkanerol/rest-api
+4. cd ../../
+5. cd src/main/docker
+6. docker-compose up
+7. open http://localhost:9005/
