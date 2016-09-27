@@ -36,7 +36,6 @@ public class TaskConroller {
 
     @RequestMapping(value = "/task/", method = RequestMethod.POST)
     Task createTask(@RequestBody Task task){
-        System.out.println(task);
         return taskService.create(task);
     }
 
