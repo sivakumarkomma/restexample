@@ -46,6 +46,7 @@ export class AppComponent {
     }
 
     delete() {
+        this.taskService.delete(this.task);
         this.tasks.splice(this.findSelectedCarIndex(), 1);
         this.task = null;
         this.displayDialog = false;

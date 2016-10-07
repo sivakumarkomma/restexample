@@ -15,6 +15,7 @@ An example rest api project.
 # How to install
 
 ## What you will need
+* nginx
 * java
 * gradle
 * npm
@@ -23,6 +24,10 @@ An example rest api project.
   username = root
   password = root
   
+
+## Configure proxy settings
+* start nginx with nginx.conf file
+
 ## Start backend  
 * cd backend
 * gradle build
@@ -31,7 +36,6 @@ An example rest api project.
 At this point, be sure http://localhost:9090/api/task is up.
 
 ## Start frontend
-open new terminal
 * cd frontend
 * npm install
 * npm start
