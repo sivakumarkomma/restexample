@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Task} from './tasks/task';
-import {TaskService} from './tasks/taskservice';
+import {Task} from './task';
+import {TaskService} from './taskservice';
 
 class PrimeTask implements Task {
 
@@ -8,10 +8,10 @@ class PrimeTask implements Task {
 }
 
 @Component({
-	templateUrl: './app/app.component.html',
-	selector: 'my-app'
+	templateUrl: './app/tasks/task-list.component.html',
+	selector: 'task-list'
 })
-export class AppComponent {
+export class TaskListComponent {
 
 	displayDialog: boolean;
 
