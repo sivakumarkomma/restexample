@@ -15,18 +15,24 @@ An example rest api project.
 # How to install
 
 ## What you will need
+* mysql server
 * nginx
 * java
 * gradle
 * npm
-* mysql server and db 
-  url = jdbc:mysql://localhost:3306/rest
-  username = root
-  password = root
+
   
 
+## Start mysql
+* install mysql server
+* start mysql server 
+* create a db 
+  * url = jdbc:mysql://localhost:3306/rest
+  * username = root
+  * password = root
+
 ## Configure proxy settings
-* start nginx with nginx.conf file
+* start nginx with [nginx.conf](./nginx.conf)  file
 
 ## Start backend  
 * cd backend
