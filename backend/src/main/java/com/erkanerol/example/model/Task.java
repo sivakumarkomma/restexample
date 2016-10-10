@@ -65,4 +65,14 @@ public class Task {
     public void setDone(Boolean done) {
         isDone = done;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", details='" + details + '\'' +
+                ", isDone=" + isDone +
+                '}';
+    }
 }

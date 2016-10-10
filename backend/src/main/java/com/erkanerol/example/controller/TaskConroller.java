@@ -1,5 +1,6 @@
 package com.erkanerol.example.controller;
 
+import com.erkanerol.example.dto.TaskDto;
 import com.erkanerol.example.exceptions.RestException;
 import com.erkanerol.example.model.Task;
 import com.erkanerol.example.exceptions.NoContentException;
@@ -36,13 +37,14 @@ public class TaskConroller {
     }
 
     @RequestMapping(value = "/task/", method = RequestMethod.POST)
-    Task createTask(@RequestBody Task task){
-        return taskService.create(task);
+    Task createTask(@RequestBody TaskDto taskDto){
+        System.out.println(taskDto);
+        return taskService.create(taskDto.getTask());
     }
 
     @RequestMapping(value = "/task/", method = RequestMethod.PUT)
-    Task updateTask(@RequestBody Task task){
-        return taskService.update(task);
+    Task updateTask(@RequestBody TaskDto taskDto){
+        return taskService.update(taskDto.getTask());
     }
 
     @RequestMapping(value = "/task/{id}", method = RequestMethod.DELETE)
