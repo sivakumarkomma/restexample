@@ -18,10 +18,6 @@
     <p-dialog header="Task Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="task">
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="id">Id</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="id" [(ngModel)]="task.id" /></div>
-            </div>
-            <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="title">Title</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="task.title" /></div>
             </div>
@@ -36,8 +32,8 @@
         </div>
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>
-                <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+                <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete" *ngIf="!newTask"></button>
+                <button type="button" pButton icon="fa-check" (click)="save()" label="Save" ></button>
             </div>
         </footer>
     </p-dialog>

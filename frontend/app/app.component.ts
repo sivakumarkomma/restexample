@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Task} from './cars/task';
-import {TaskService} from './cars/taskservice';
+import {Task} from './tasks/task';
+import {TaskService} from './tasks/taskservice';
 
 class PrimeTask implements Task {
 
@@ -36,10 +36,13 @@ export class AppComponent {
     }
 
     save() {
-        if(this.newTask)
+        if (this.newTask) {
+            this.taskService.insert(this.task);
             this.tasks.push(this.task);
-        else
+        } else {
+            this.taskService.update(this.task);
             this.tasks[this.findSelectedCarIndex()] = this.task;
+        }
 
         this.task = null;
         this.displayDialog = false;
