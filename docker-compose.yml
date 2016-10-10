@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+    nginx_reverse_proxy:
+        image: nginx-reverse-proxy:latest
+        ports:
+            - "80:80"
+
+    mysql_server:
+        image: mysql:latest
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_DATABASE: rest
