@@ -32,7 +32,7 @@ An example rest api project.
   * password = root
 
 ## Configure proxy settings
-* start nginx with [nginx.conf](./nginx.conf)  file
+* start nginx with [nginx.conf](./nginx.conf)  file (don't forget to update access_log and error_log files path)
 
 ## Start backend  
 * cd backend
