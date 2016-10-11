@@ -12,39 +12,25 @@ An example rest api project.
 * PrimeNG
 
 
+### Devops Tools
+* Docker
+* Docker Compose
+* Nginx
+
 # How to install
 
 ## What you will need
-* mysql server
-* nginx
-* java
+* docker
 * gradle
 * npm
-
+* docker compose
   
 
-## Start mysql
-* install mysql server
-* start mysql server 
-* create a db 
-  * url = jdbc:mysql://localhost:3306/rest
-  * username = root
-  * password = root
+## Create Images
+* backend
+* fronend
+* nginx reverse proxy
 
-## Configure proxy settings
-* start nginx with [nginx.conf](./nginx.conf)  file (don't forget to update access_log and error_log files path)
-
-## Start backend  
-* cd backend
-* gradle build
-* java -jar build/libs/rest-api-0.0.1-SNAPSHOT.jar
-
-At this point, be sure http://localhost:9090/api/task is up.
-
-## Start frontend
-* cd frontend
-* npm install
-* npm start
-
-At this point, be sure http://localhost:8080 is up.
+## Start 
+* docker-compose up
 
