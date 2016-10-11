@@ -6,18 +6,20 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('se.transmode.gradle:gradle-docker:1.2')
 	}
 }
 
 apply plugin: 'base'
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
+apply plugin: 'docker'
 
 jar {
 	baseName = 'rest-api'
-	version = '0.0.1-SNAPSHOT'
+	version = '0.1'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -26,6 +28,20 @@ repositories {
 	mavenCentral()
 }
 
+
+group = 'erkanerol'
+
+
+task buildDocker(type: Docker, dependsOn: build) {
+	applicationName = jar.baseName
+	dockerfile = file('src/main/docker/Dockerfile')
+	doFirst {
+		copy {
+			from jar
+			into stageDir
+		}
+	}
+}
 
 dependencies {
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
