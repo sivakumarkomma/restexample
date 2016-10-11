@@ -1,17 +1,44 @@
 version: '2'
 
 services:
+
     nginx_reverse_proxy:
         image: nginx-reverse-proxy:latest
         ports:
             - "80:80"
+        links:
+            - backend:backend
+            - frontend:frontend
+        environment:
+            - NGINX_HOST=localhost
+            - NGINX_PORT=80
 
     mysql_server:
         image: mysql:latest
         ports:
             - "3306:3306"
+        expose:
+            - "3306"
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root
-            MYSQL_DATABASE: rest
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=restuser
+            - MYSQL_PASSWORD=restuserpassword
+            - MYSQL_DATABASE=rest
+   
+    backend:
+        image: erkanerol/rest-api
+        ports: 
+            - "9090:9090"
+        links:
+            - mysql_server:mysql_server_url
+        depends_on:
+            - mysql_server
+        expose:
+            - "9090"
+
+    frontend:
+        image: erkanerol/rest-frontend
+        ports: 
+            - "8080:80"
+        expose:
+            - "8080"
