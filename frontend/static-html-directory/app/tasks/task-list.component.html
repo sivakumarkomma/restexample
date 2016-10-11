@@ -1,0 +1,33 @@
+<div class="ContentSideSections Implementation">
+    <p-dataTable [value]="tasks" selectionMode="single" [(selection)]="selectedTask" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
+        <header>CRUD for Tasks</header>
+        <p-column field="id" header="Id" [sortable]="true"></p-column>
+        <p-column field="title" header="Title" [sortable]="true"></p-column>
+        <p-column field="details" header="Details" [sortable]="true"></p-column>
+        <p-column field="done" header="Done" [sortable]="true"></p-column>
+        <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></footer>
+    </p-dataTable>
+
+    <p-dialog header="Task Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="task">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="title">Title</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="task.title" /></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="details">Details</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="details" [(ngModel)]="task.details" /></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="done">Is Done</label></div>
+                <div class="ui-grid-col-8"><p-checkbox id="done" [(ngModel)]="task.done" binary="true"></p-checkbox></div>
+            </div>
+        </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete" *ngIf="!newTask"></button>
+                <button type="button" pButton icon="fa-check" (click)="save()" label="Save" ></button>
+            </div>
+        </footer>
+    </p-dialog>
+</div>
